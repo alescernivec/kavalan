@@ -1,0 +1,15 @@
+kavalan.get
+  ✓ should return an empty array for a non-existing task id (90ms)
+  ✓ should return a non-empty list of all tasks (129ms)
+  1) should be able to find one completed task
+
+2 passing (219ms)
+1 failing
+
+1) kavalan.get should be able to find one completed task:
+
+    Uncaught AssertionError: expected 'Started' to be 'Completed'
+    + expected - actual
+
+    -Started
+    +Completed
