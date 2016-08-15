@@ -40,9 +40,31 @@ describe('controllers', function() {
             done();
           });
       });
+      
+      
 
     });
+    
+    describe('GET /get_token', function() {
 
+      it('should accept a name parameter', function(done) {
+
+        request(server)
+          .get('/get_token')
+          .query({ name: 'valid_user'})
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end(function(err, res) {
+            should.not.exist(err);
+            res.body.should.eql('valid_token');
+
+            done();
+          });
+      });
+
+    });    
+    
   });
 
 });

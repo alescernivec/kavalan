@@ -41,7 +41,29 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse"    
+  /get_token:
+    x-swagger-router-controller: kavalan
+    get:
+      description: Returns valid_token
+      operationId: get_token
+      parameters:
+        - name: name
+          in: query
+          description: Client's name - to whom the token is issued
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                   
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions

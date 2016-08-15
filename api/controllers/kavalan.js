@@ -13,6 +13,27 @@
 var util = require('util');
 
 /*
+ Function for obtaining a token.
+
+ name: name of the client making a request.
+
+ Returns: a token
+*/
+function get_token(req, res) {
+    // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
+    var name = req.swagger.params.name.value,
+        return_token;
+    if (name === 'valid_user') {
+        return_token = 'valid_token';
+    } else {
+        return_token = 'not a valid user';
+    }
+
+    // this sends back a JSON response which is a single string
+    res.json(return_token);
+}
+
+/*
   Functions in a127 controllers used for operations should take two parameters:
 
   Param 1: a handle to the request object
@@ -26,6 +47,7 @@ function hello(req, res) {
     // this sends back a JSON response which is a single string
     res.json(hello_reply);
 }
+
 /*
  Once you 'require' a module you can reference the things that it exports.  These are defined in module.exports.
 
@@ -39,7 +61,8 @@ function hello(req, res) {
   we specify that in the exports of this module that 'hello' maps to the function named 'hello'
  */
 module.exports = {
-    hello: hello
+    hello: hello,
+    get_token: get_token
 };
 
 
