@@ -13,6 +13,20 @@
 var util = require('util');
 
 /*
+  Functions in a127 controllers used for operations should take two parameters:
+
+  Param 1: a handle to the request object
+  Param 2: a handle to the response object
+ */
+function hello(req, res) {
+    // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
+    var name = req.swagger.params.name.value || 'stranger',
+        hello_reply = util.format('Hello, %s!', name);
+
+    // this sends back a JSON response which is a single string
+    res.json(hello_reply);
+}
+/*
  Once you 'require' a module you can reference the things that it exports.  These are defined in module.exports.
 
  For a controller in a127 (which this is) you should export the functions referenced in your Swagger document by name.
@@ -25,20 +39,7 @@ var util = require('util');
   we specify that in the exports of this module that 'hello' maps to the function named 'hello'
  */
 module.exports = {
-  hello: hello
+    hello: hello
 };
 
-/*
-  Functions in a127 controllers used for operations should take two parameters:
 
-  Param 1: a handle to the request object
-  Param 2: a handle to the response object
- */
-function hello(req, res) {
-  // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  var name = req.swagger.params.name.value || 'stranger';
-  var hello = util.format('Hello, %s!', name);
-
-  // this sends back a JSON response which is a single string
-  res.json(hello);
-}
